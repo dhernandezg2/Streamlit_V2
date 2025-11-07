@@ -6,7 +6,7 @@ st.title("🚗 Análisis de Repostajes")
 
 # ============ CARGA (UI sin lógica) ============
 st.sidebar.header("Datos de entrada")
-modo = st.sidebar.radio("Fuente de datos", ["📤 Subir archivo", "📁 Ruta local"])
+modo = st.sidebar.radio("Fuente de datos", ["📤 Subir archivo"])
 
 if modo == "📤 Subir archivo":
     archivo = st.sidebar.file_uploader("Sube un Excel (.xlsx)", type=["xlsx"])
