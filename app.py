@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # ============ CONFIGURACIÓN GENERAL ============
 st.set_page_config(page_title="Repostajes", layout="wide")
@@ -12,6 +13,15 @@ if modo == "📤 Subir archivo":
     archivo = st.sidebar.file_uploader("Sube un Excel (.xlsx)", type=["xlsx"])
     if archivo:
         st.success("Archivo cargado")
+
+        df = pd.read_excel(archivo)  #lee el excel que se carga
+
+        #Vista previa de los datos subidos
+        st.subheader("Vista previa de los datos")
+        st.dataframe(df.head(10), use_container_width = True) 
+    
+    else:
+        df = None
 else:
     st.sidebar.button("Cargar")
 
