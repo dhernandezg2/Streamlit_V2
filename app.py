@@ -33,6 +33,8 @@ aplicar = st.sidebar.button("Aplicar filtros")
 st.divider()
 st.subheader("📊 Vehículos agrupados por número de repostajes")
 
+st.write("")
+
 st.subheader("📈 Gráficos de análisis")
 
 st.divider()
