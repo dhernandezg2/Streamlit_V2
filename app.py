@@ -22,3 +22,28 @@ st.sidebar.header("Filtros")
 tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Turismo", "Camión", "Ambulancia"])  #tipos de vehiculo
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasolina", "Gasoil", "Gas"])  #tipos de combustible
 lugar = st.sidebar.text_input("Dirección")
+
+parametro = st.sidebar.selectbox("Parámetro", ["Repostado", "Distancia", "Consumo"])
+rango_valores = st.sidebar.slider("Rango de valores", 0, 100, (10, 90))
+rango_fechas = st.sidebar.date_input("Rango de fechas", [])
+
+aplicar = st.sidebar.button("Aplicar filtros")
+
+# ============ CONTENIDO PRINCIPAL ============
+st.divider()
+st.subheader("📊 Vehículos agrupados por número de repostajes")
+st.info("Aquí aparecerá una tabla con los vehículos filtrados y su nº de repostajes.")
+
+st.subheader("📈 Gráficos de análisis")
+col1, col2, col3 = st.columns(3)
+col1.write("📉 Histograma de Repostado (placeholder)")
+col2.write("📏 Histograma de Distancia (placeholder)")
+col3.write("⚙️ Histograma de Consumo (placeholder)")
+
+st.divider()
+st.subheader("🔎 Detalle por matrícula")
+st.write("Aquí irá un selector de matrícula y gráficos de detalle (timeline, dispersión, etc.).")
+
+st.divider()
+st.subheader("💾 Exportación")
+st.write("Aquí irá el botón para descargar CSV filtrado.")
