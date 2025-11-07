@@ -12,13 +12,15 @@ modo = st.sidebar.radio("Fuente de datos", ["📤 Subir archivo"])
 if modo == "📤 Subir archivo":
     archivo = st.sidebar.file_uploader("Sube un Excel (.xlsx)", type=["xlsx"])
     if archivo:
-        st.success("Archivo cargado")
 
         df = pd.read_excel(archivo)  #lee el excel que se carga
 
         #Vista previa de los datos subidos
         st.subheader("Vista previa de los datos")
         st.dataframe(df.head(10), use_container_width = True) 
+
+        #Transformo las columnas a minusculas
+        df.columns = df.columns.str.lower().str.strip()
     
     else:
         df = None
