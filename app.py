@@ -17,9 +17,8 @@ else:
 
 st.sidebar.divider()
 
-
-
-
-
-
-
+# ============ FILTROS (UI sin lógica) ============
+st.sidebar.header("Filtros")
+tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Turismo", "Camión", "Ambulancia"])  #tipos de vehiculo
+tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasolina", "Gasoil", "Gas"])  #tipos de combustible
+lugar = st.sidebar.text_input("Dirección")
