@@ -32,7 +32,6 @@ aplicar = st.sidebar.button("Aplicar filtros")
 # ============ CONTENIDO PRINCIPAL ============
 st.divider()
 st.subheader("📊 Vehículos agrupados por número de repostajes")
-st.info("Aquí aparecerá una tabla con los vehículos filtrados y su nº de repostajes.")
 
 st.subheader("📈 Gráficos de análisis")
 
