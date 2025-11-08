@@ -35,7 +35,7 @@ st.sidebar.divider()
 
 # FILTROS LATERALES
 st.sidebar.header("Filtros")
-tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Turismo", "Camión", "Ambulancia"])  #tipos de vehículo
+tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Furgoneta", "Camión", "Sedán"])  #tipos de vehículo
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasolina", "Gasoil", "Gas"])  #tipos de combustible
 lugar = st.sidebar.text_input("Dirección")
 
