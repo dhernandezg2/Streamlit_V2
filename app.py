@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 
 #Funciones externas
-from modulos.filtros import filtro_tipo_vehiculo
+from modulos.filtros import aplicar_filtros_basicos
+
 
 
 # CONFIGURACIÓN GENERAL 
@@ -49,7 +50,7 @@ if aplicar:
 
     #Aplicamos el filtro de vehículo.
     if df is not None:
-        df_filtrado = filtro_tipo_vehiculo(df,tipos_vehiculo)
+        df_filtrado = aplicar_filtros_basicos(df,tipos_vehiculo,tipos_combustible,lugar)
 
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
