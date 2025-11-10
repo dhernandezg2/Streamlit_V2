@@ -120,6 +120,3 @@ st.subheader("📊 Vehículos agrupados por número de repostajes")
 st.write("")
 
 st.subheader("📈 Gráficos de análisis")
-
-st.divider()
-st.subheader("🔎 Detalle por matrícula")
