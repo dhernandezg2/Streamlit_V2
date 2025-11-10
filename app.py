@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 
 #Funciones externas
-from modulos.filtros import aplicar_filtros_basicos
-
+from modulos.filtros import aplicar_filtros
 
 
 # CONFIGURACIÓN GENERAL 
@@ -38,7 +37,7 @@ st.sidebar.divider()
 st.sidebar.header("Filtros")
 tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Furgoneta", "Camión", "Sedán"])  #tipos de vehículo
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasolina", "Gasoil", "Gas"])  #tipos de combustible
-lugar = st.sidebar.text_input("Dirección")
+lugar = st.sidebar.text_input("Dirección") #Direccion
 
 parametro = st.sidebar.selectbox("Parámetro", ["Repostado", "Distancia", "Consumo"])
 rango_valores = st.sidebar.slider("Rango de valores", 0, 100, (10, 90))
@@ -48,9 +47,9 @@ aplicar = st.sidebar.button("Aplicar filtros")
 
 if aplicar:
 
-    #Aplicamos el filtro de vehículo.
+    #Aplicamos los filtros de la columna de la izquierda.
     if df is not None:
-        df_filtrado = aplicar_filtros_basicos(df,tipos_vehiculo,tipos_combustible,lugar)
+        df_filtrado = aplicar_filtros(df,tipos_vehiculo,tipos_combustible,lugar)
 
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
