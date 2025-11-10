@@ -49,7 +49,17 @@ if aplicar:
 
     #Aplicamos los filtros de la columna de la izquierda.
     if df is not None:
-        df_filtrado = aplicar_filtros(df,tipos_vehiculo,tipos_combustible,lugar)
+
+        lugar = (lugar or "").strip() or None
+
+        df_filtrado = aplicar_filtros(
+            df,
+            tipos_vehiculo = tipos_vehiculo,
+            tipos_combustible = tipos_combustible,
+            lugar = lugar,
+            parametro = parametro,
+            rango = rango_valores
+            )
 
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
