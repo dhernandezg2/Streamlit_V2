@@ -78,9 +78,10 @@ if aplicar:
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
 
-    
-    # SELECCION DEL VEHICULO
+df_filtrado = st.session_state.df_filtrado  # Recuperamos el dataframe persistente
 
+if df_filtrado is not None and not df_filtrado.empty:
+    # SELECCION DEL VEHICULO
     st.divider()
     st.subheader("Analisis individual del vehiculo")
 
@@ -128,6 +129,9 @@ if aplicar:
         st.plotly_chart(fig, use_container_width = True)
     else:
         st.warning("No se generó el histograma")
+
+else:
+    st.info("Aplica los filtros para ver los vehículos disponibles.")
 
 # CONTENIDO PRINCIPAL 
 st.divider()
