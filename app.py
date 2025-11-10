@@ -40,12 +40,11 @@ tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasolina", "
 lugar = st.sidebar.text_input("Dirección") #Direccion
 
 parametro = st.sidebar.selectbox("Parámetro", ["Repostado", "Distancia", "Consumo"])
-rango_valores = st.sidebar.slider("Rango de valores", 0, 100, (10, 90))
 rango_fechas = st.sidebar.date_input("Rango de fechas", [])
 
 aplicar = st.sidebar.button("Aplicar filtros")
 
-#Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100
+#Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100 (para los valores numericos)
 if df is not None and parametro.lower() in df.columns:
     min_val = float(df[parametro.lower()].min())
     max_val = float(df[parametro.lower()].max())
