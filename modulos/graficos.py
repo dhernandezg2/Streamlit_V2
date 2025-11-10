@@ -21,8 +21,8 @@ def histogramas_parametros(df,parametro):
     )
 
     fig.update_layout(
-        xasis_title = columna,
-        yasis_title = "frecuencia",
+        xaxis_title = columna,
+        yaxis_title = "frecuencia",
         template = "plotly_white",
         bargap = 0.1
     )
