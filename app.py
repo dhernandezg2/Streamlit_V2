@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+if "df_filtrado" not in st.session_state:
+    st.session_state.df_filtrado = None
+
 #Funciones externas
 from modulos.filtros import aplicar_filtros
 from modulos.graficos import histogramas_parametros
@@ -70,6 +73,7 @@ if aplicar:
             parametro = parametro,
             rango = rango_valores
             )
+        st.session_state.df_filtrado = df_filtrado
 
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
@@ -79,6 +83,8 @@ if aplicar:
 
     st.divider()
     st.subheader("Analisis individual del vehiculo")
+
+    df_filtrado = st.session_state.df_filtrado
 
     if df is None:
 
