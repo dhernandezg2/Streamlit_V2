@@ -3,6 +3,7 @@ import pandas as pd
 
 #Funciones externas
 from modulos.filtros import aplicar_filtros
+from modulos.graficos import histogramas_parametros
 
 
 # CONFIGURACIÓN GENERAL 
@@ -111,7 +112,16 @@ if aplicar:
 
                 st.dataframe(df_vehiculo, use_container_width = True)
 
+    #Histogramas del vehiculo
+    st.divider()
+    st.subheader(f"histograma de {parametro} del vehiculo seleccionado")
 
+    fig = histogramas_parametros(df_vehiculo, parametro)
+
+    if fig:
+        st.plotly_chart(fig, use_container_width = True)
+    else:
+        st.warning("No se generó el histograma")
 
 # CONTENIDO PRINCIPAL 
 st.divider()
