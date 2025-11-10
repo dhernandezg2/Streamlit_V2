@@ -73,43 +73,44 @@ if aplicar:
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
         st.dataframe(df_filtrado, use_container_width = True)
 
+    
+    # SELECCION DEL VEHICULO
 
-# SELECCION DEL VEHICULO
+    st.divider()
+    st.subheader("Analisis individual del vehiculo")
 
-st.divider()
-st.subheader("Analisis individual del vehiculo")
+    if df is None:
 
-if df is None:
-
-    st.info("Sube el archivo")
-
-else:
-
-    if "vehiculo" not in df.columns:
-
-        st.warning("No existe columna de vehiculos")
-
-    elif df_filtrado is None or df_filtrado.empty:
-
-        st.info("No hay informacion en el datashet")
+        st.info("Sube el archivo")
 
     else:
 
-        vehiculos = (df_filtrado["vehiculo"].astype(str).dropna().unique())
+        if "vehiculo" not in df.columns:
 
-        vehiculos = sorted([vehiculo for vehiculo in vehiculos if vehiculo.strip() != ""])
+            st.warning("No existe columna de vehiculos")
 
-        if len(vehiculos) == 0:
+        elif df_filtrado is None or df_filtrado.empty:
 
-            st.info("No hay vehiculos")
+            st.info("No hay informacion en el datashet")
 
         else:
 
-            vehiculo_seleccionado = st.selectbox("Selecciona la matricula", vehiculos, index = 0)
+            vehiculos = (df_filtrado["vehiculo"].astype(str).dropna().unique())
 
-            df_vehiculo = df_filtrado[df_filtrado["vehiculo"].astype(str) == str(vehiculo_seleccionado)]
+            vehiculos = sorted([vehiculo for vehiculo in vehiculos if vehiculo.strip() != ""])
 
-            st.dataframe(df_vehiculo, use_container_width = True)
+            if len(vehiculos) == 0:
+
+                st.info("No hay vehiculos")
+
+            else:
+
+                vehiculo_seleccionado = st.selectbox("Selecciona la matricula", vehiculos, index = 0)
+
+                df_vehiculo = df_filtrado[df_filtrado["vehiculo"].astype(str) == str(vehiculo_seleccionado)]
+
+                st.dataframe(df_vehiculo, use_container_width = True)
+
 
 
 # CONTENIDO PRINCIPAL 
