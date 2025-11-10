@@ -45,6 +45,16 @@ rango_fechas = st.sidebar.date_input("Rango de fechas", [])
 
 aplicar = st.sidebar.button("Aplicar filtros")
 
+#Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100
+if df is not None and parametro.lower() in df.columns:
+    min_val = float(df[parametro.lower()].min())
+    max_val = float(df[parametro.lower()].max())
+else:
+    min_val, max_val = 0, 100
+
+rango_valores = st.sidebar.slider("Rango de valores", min_val, max_val, (min_val, max_val))
+
+
 if aplicar:
 
     #Aplicamos los filtros de la columna de la izquierda.
