@@ -12,7 +12,7 @@ def filtro_rango(df,columna,rango):
         return df
 
     #valores del rango
-    valor_max, valor_min = rango
+    valor_min, valor_max = rango
 
     #Aseguramos que sea de tipo numerico
     df[columna] = pd.to_numeric(df[columna], errors= "coerce")
@@ -78,7 +78,7 @@ def aplicar_filtros(df,tipos_vehiculo = None,tipos_combustible = None,lugar = No
 
     #Filtramos por direccion
     if lugar:
-         df_filtrado = filtro_tipo_combustible(df_filtrado, lugar)
+         df_filtrado = filtro_direccion(df_filtrado, lugar)
 
     #Aplicamos la funcion de rangos dinamicos
     if parametro and rango:
