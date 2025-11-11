@@ -25,7 +25,7 @@ if modo == "📤 Subir archivo":
 
         #Vista previa de los datos subidos
         st.subheader("Vista previa de los datos")
-        st.dataframe(df.head(10), use_container_width = True) 
+        st.dataframe(df.head(10), width='stretch') 
 
         #Transformo las columnas a minusculas
         df.columns = df.columns.str.lower().str.strip()
@@ -76,7 +76,7 @@ if aplicar:
         st.session_state.df_filtrado = df_filtrado
 
         st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
-        st.dataframe(df_filtrado, use_container_width = True)
+        st.dataframe(df_filtrado, width='stretch')
 
 df_filtrado = st.session_state.df_filtrado  # Recuperamos el dataframe persistente
 
@@ -117,7 +117,7 @@ if df_filtrado is not None and not df_filtrado.empty:
 
                 df_vehiculo = df_filtrado[df_filtrado["vehiculo"].astype(str) == str(vehiculo_seleccionado)]
 
-                st.dataframe(df_vehiculo, use_container_width = True)
+                st.dataframe(df_vehiculo, width='stretch')
 
     #Histogramas del vehiculo
     st.divider()
@@ -126,7 +126,7 @@ if df_filtrado is not None and not df_filtrado.empty:
     fig = Grafico_lineal_parametros(df_vehiculo, parametro)
 
     if fig:
-        st.plotly_chart(fig, use_container_width = True)
+        st.plotly_chart(fig, width='stretch')
     else:
         st.warning("No se generó el gráfico")
 else:
