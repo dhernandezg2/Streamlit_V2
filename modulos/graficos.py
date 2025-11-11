@@ -22,7 +22,6 @@ def Grafico_lineal_parametros(df,parametro):
         x = eje_x,
         y = columna,
         markers= True,
-        nbins = 15,
         title = f"Evolución de {columna}",
         color_discrete_sequence = ["#1f77b4"]
     )
