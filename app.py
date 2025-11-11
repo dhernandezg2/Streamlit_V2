@@ -6,7 +6,7 @@ if "df_filtrado" not in st.session_state:
 
 #Funciones externas
 from modulos.filtros import aplicar_filtros
-from modulos.graficos import histogramas_parametros
+from modulos.graficos import Grafico_lineal_parametros
 
 
 # CONFIGURACIÓN GENERAL 
@@ -123,20 +123,11 @@ if df_filtrado is not None and not df_filtrado.empty:
     st.divider()
     st.subheader(f"histograma de {parametro} del vehiculo seleccionado")
 
-    fig = histogramas_parametros(df_vehiculo, parametro)
+    fig = Grafico_lineal_parametros(df_vehiculo, parametro)
 
     if fig:
         st.plotly_chart(fig, use_container_width = True)
     else:
-        st.warning("No se generó el histograma")
-
+        st.warning("No se generó el gráfico")
 else:
     st.info("Aplica los filtros para ver los vehículos disponibles.")
-
-# CONTENIDO PRINCIPAL 
-st.divider()
-st.subheader("📊 Vehículos agrupados por número de repostajes")
-
-st.write("")
-
-st.subheader("📈 Gráficos de análisis")

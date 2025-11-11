@@ -1,7 +1,7 @@
 import plotly.express as px
 
 #Histogramas para los diferentes parametros
-def histogramas_parametros(df,parametro):
+def Grafico_lineal_parametros(df,parametro):
 
     if df is None or df.empty:
         return None
@@ -11,20 +11,27 @@ def histogramas_parametros(df,parametro):
     if columna not in df.columns:
         return None
     
-    #Creamos el histograma
-    fig = px.histogram(
+    #Filtramos por fecha para ordenarlas
+    if "fecha" in df.columns:
+        df = df.sort_values("fecha")
+        eje_x = "fecha"
+    
+    #Creamos el grafico lineal
+    fig = px.line(
         df,
-        x = columna,
+        x = eje_x,
+        y = columna,
+        markers= True,
         nbins = 15,
-        title = f"Distribucion de {columna}",
+        title = f"Evolución de {columna}",
         color_discrete_sequence = ["#1f77b4"]
     )
 
+    fig.update_traces(line = dict(width=2))
     fig.update_layout(
-        xaxis_title = columna,
-        yaxis_title = "frecuencia",
+        xaxis_title = "fecha" if eje_x == "fecha" else "",
+        yaxis_title = columna,
         template = "plotly_white",
-        bargap = 0.1
     )
 
     return fig
