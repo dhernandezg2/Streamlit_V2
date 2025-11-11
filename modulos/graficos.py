@@ -82,7 +82,7 @@ def mapa_repostajes(df, vehiculo):
     fig.update_layout(
         mapbox_style = "open-street-map",
         margin = dict(r=0, t=50, l=0, b=0),
-        coloraxis_colorbar=dict(title="Repostado" if "repostado" in df_veh.columns else "")
+        coloraxis_colorbar=dict(title="Repostado" if "repostado" in df_vehiculo.columns else "")
     )
-    
+
     return fig
