@@ -7,6 +7,7 @@ if "df_filtrado" not in st.session_state:
 #Funciones externas
 from modulos.filtros import aplicar_filtros
 from modulos.graficos import Grafico_lineal_parametros
+from modulos.graficos import mapa_repostajes
 
 
 # CONFIGURACIÓN GENERAL 
@@ -129,5 +130,16 @@ if df_filtrado is not None and not df_filtrado.empty:
         st.plotly_chart(fig, width='stretch')
     else:
         st.warning("No se generó el gráfico")
+
+    st.divider()
+    st.subheader(f"Mapa de repostajes del vehiculo {vehiculo_seleccionado}")
+
+    fig_mapa = mapa_repostajes(df_vehiculo, vehiculo_seleccionado)
+
+    if fig_mapa:
+        st.plotly_chart(fig_mapa, width='stretch')
+    else:
+        st.warning("No se generó el gráfico")
+
 else:
     st.info("Aplica los filtros para ver los vehículos disponibles.")
