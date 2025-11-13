@@ -44,10 +44,8 @@ tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Furgoneta", "Cami
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasóleo", "Gasolina 95", "Diésel"])  #tipos de combustible
 lugar = st.sidebar.text_input("Dirección") #Direccion
 
-parametro = st.sidebar.selectbox("Parámetro", ["Repostado", "Distancia", "Consumo"])
+parametro = st.sidebar.selectbox("Parámetro", ["repostado", "distancia", "consumo"])
 rango_fechas = st.sidebar.date_input("Rango de fechas", [])
-
-aplicar = st.sidebar.button("Aplicar filtros")
 
 #Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100 (para los valores numericos)
 if df is not None and parametro.lower() in df.columns:
@@ -58,6 +56,7 @@ else:
 
 rango_valores = st.sidebar.slider("Rango de valores", min_val, max_val, (min_val, max_val))
 
+aplicar = st.sidebar.button("Aplicar filtros")
 
 if aplicar:
 
@@ -122,7 +121,7 @@ if df_filtrado is not None and not df_filtrado.empty:
 
     #Histogramas del vehiculo
     st.divider()
-    st.subheader(f"histograma de {parametro} del vehiculo seleccionado")
+    st.subheader(f"Grafico lineal de {parametro} del vehiculo seleccionado")
 
     fig = Grafico_lineal_parametros(df_vehiculo, parametro)
 
