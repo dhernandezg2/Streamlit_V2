@@ -15,6 +15,8 @@ def Grafico_lineal_parametros(df,parametro):
     if "fecha" in df.columns:
         df = df.sort_values("fecha")
         eje_x = "fecha"
+    else:
+        eje_x = df.index.name if df.index.name else "index"
     
     #Creamos el grafico lineal
     fig = px.line(

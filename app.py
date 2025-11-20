@@ -125,7 +125,7 @@ with tab_detalle:
                     if fig:
                         st.plotly_chart(fig, width='stretch')
                     else:
-                        st.warning("No se generó el gráfico")
+                        st.warning(f"No se generó el gráfico. Asegúrate de que el parámetro '{parametro}' exista en las columnas: {df_vehiculo.columns.tolist()}")
 
                     st.divider()
                     st.subheader(f"Mapa de repostajes del vehiculo {vehiculo_seleccionado}")
