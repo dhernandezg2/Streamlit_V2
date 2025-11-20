@@ -44,7 +44,7 @@ tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Furgoneta", "Cami
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasóleo", "Gasolina 95", "Diésel"])  #tipos de combustible
 lugar = st.sidebar.text_input("Dirección") #Direccion
 
-parametro = st.sidebar.selectbox("Parámetro", ["repostado", "distancia", "consumo"])
+parametro = st.sidebar.selectbox("Parámetro", ["repostado (l)", "distancia (km)", "consumo (l/km)"])
 
 
 #Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100 (para los valores numericos)
@@ -77,70 +77,65 @@ if aplicar:
             )
         st.session_state.df_filtrado = df_filtrado
 
-        st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
-        st.dataframe(df_filtrado, width='stretch')
+        # st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
+        # st.dataframe(df_filtrado, width='stretch')
 
 df_filtrado = st.session_state.df_filtrado  # Recuperamos el dataframe persistente
 
-if df_filtrado is not None and not df_filtrado.empty:
-    # SELECCION DEL VEHICULO
-    st.divider()
-    st.subheader("Analisis individual del vehiculo")
+# CREACIÓN DE PESTAÑAS
+tab_general, tab_detalle = st.tabs(["Vista General", "Análisis Detallado"])
 
-    df_filtrado = st.session_state.df_filtrado
-
-    if df is None:
-
-        st.info("Sube el archivo")
-
+with tab_general:
+    if df_filtrado is not None:
+        st.subheader(f"Resultados filtrados ({len(df_filtrado)} filas)")
+        st.dataframe(df_filtrado, width='stretch')
     else:
+        st.info("Por favor, carga un archivo y aplica los filtros para ver los datos.")
 
-        if "vehiculo" not in df.columns:
+with tab_detalle:
+    if df_filtrado is not None and not df_filtrado.empty:
+        # SELECCION DEL VEHICULO
+        st.subheader("Analisis individual del vehiculo")
 
-            st.warning("No existe columna de vehiculos")
-
-        elif df_filtrado is None or df_filtrado.empty:
-
-            st.info("No hay informacion en el datashet")
-
+        if df is None:
+            st.info("Sube el archivo")
         else:
-
-            vehiculos = (df_filtrado["vehiculo"].astype(str).dropna().unique())
-
-            vehiculos = sorted([vehiculo for vehiculo in vehiculos if vehiculo.strip() != ""])
-
-            if len(vehiculos) == 0:
-
-                st.info("No hay vehiculos")
-
+            if "vehiculo" not in df.columns:
+                st.warning("No existe columna de vehiculos")
+            elif df_filtrado is None or df_filtrado.empty:
+                st.info("No hay informacion en el dataset")
             else:
+                vehiculos = (df_filtrado["vehiculo"].astype(str).dropna().unique())
+                vehiculos = sorted([vehiculo for vehiculo in vehiculos if vehiculo.strip() != ""])
 
-                vehiculo_seleccionado = st.selectbox("Selecciona la matricula", vehiculos, index = 0)
+                if len(vehiculos) == 0:
+                    st.info("No hay vehiculos")
+                else:
+                    vehiculo_seleccionado = st.selectbox("Selecciona la matricula", vehiculos, index = 0)
+                    
+                    df_vehiculo = df_filtrado[df_filtrado["vehiculo"].astype(str) == str(vehiculo_seleccionado)]
+                    st.dataframe(df_vehiculo, width='stretch')
 
-                df_vehiculo = df_filtrado[df_filtrado["vehiculo"].astype(str) == str(vehiculo_seleccionado)]
+                    #Histogramas del vehiculo
+                    st.divider()
+                    st.subheader(f"Grafico lineal de {parametro} del vehiculo seleccionado")
 
-                st.dataframe(df_vehiculo, width='stretch')
+                    fig = Grafico_lineal_parametros(df_vehiculo, parametro)
 
-    #Histogramas del vehiculo
-    st.divider()
-    st.subheader(f"Grafico lineal de {parametro} del vehiculo seleccionado")
+                    if fig:
+                        st.plotly_chart(fig, width='stretch')
+                    else:
+                        st.warning("No se generó el gráfico")
 
-    fig = Grafico_lineal_parametros(df_vehiculo, parametro)
+                    st.divider()
+                    st.subheader(f"Mapa de repostajes del vehiculo {vehiculo_seleccionado}")
 
-    if fig:
-        st.plotly_chart(fig, width='stretch')
+                    fig_mapa = mapa_repostajes(df_vehiculo, vehiculo_seleccionado)
+
+                    if fig_mapa:
+                        st.plotly_chart(fig_mapa, width='stretch')
+                    else:
+                        st.warning("No se generó el gráfico")
+
     else:
-        st.warning("No se generó el gráfico")
-
-    st.divider()
-    st.subheader(f"Mapa de repostajes del vehiculo {vehiculo_seleccionado}")
-
-    fig_mapa = mapa_repostajes(df_vehiculo, vehiculo_seleccionado)
-
-    if fig_mapa:
-        st.plotly_chart(fig_mapa, width='stretch')
-    else:
-        st.warning("No se generó el gráfico")
-
-else:
-    st.info("Aplica los filtros para ver los vehículos disponibles.")
+        st.info("Aplica los filtros para ver los vehículos disponibles.")
