@@ -44,7 +44,7 @@ tipos_vehiculo = st.sidebar.multiselect("Tipo de vehículo", ["Furgoneta", "Cami
 tipos_combustible = st.sidebar.multiselect("Tipo de combustible", ["Gasóleo", "Gasolina 95", "Diésel"])  #tipos de combustible
 lugar = st.sidebar.text_input("Dirección") #Direccion
 
-parametro = st.sidebar.selectbox("Parámetro", ["repostado (l)", "distancia (km)", "consumo (l/km)"])
+parametro = st.sidebar.selectbox("Parámetro", ["repostado", "distancia", "consumo"])
 
 
 #Hacemos que los rangos sean dinamicos y no sean siempre 0 - 100 (para los valores numericos)
